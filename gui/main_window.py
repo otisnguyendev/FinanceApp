@@ -1,6 +1,10 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 
+from gui.category_manager import CategoryManager
+from gui.transaction_form import TransactionForm
+from gui.report_viewer import ReportViewer
+from gui.wallet_manager import WalletManager
 
 class FinanceApp(tk.Tk):
     def __init__(self):
@@ -70,9 +74,11 @@ class FinanceApp(tk.Tk):
         button_frame.pack(pady=10)
 
         add_income_btn = tk.Button(button_frame, text="➕ Thêm thu nhập", bg="#2ECC71", fg="white",
-                                   font=("Poppins", 12, "bold"), padx=10, pady=5)
+                                   font=("Poppins", 12, "bold"), padx=10, pady=5,
+                                   command=lambda: self.open_transaction_form("income"))
         add_expense_btn = tk.Button(button_frame, text="➖ Thêm chi tiêu", bg="#E74C3C", fg="white",
-                                    font=("Poppins", 12, "bold"), padx=10, pady=5)
+                                    font=("Poppins", 12, "bold"), padx=10, pady=5,
+                                    command=lambda: self.open_transaction_form("expense"))
         edit_btn = tk.Button(button_frame, text="✏️ Sửa giao dịch", bg="#F1C40F", fg="white",
                              font=("Poppins", 12, "bold"), padx=10, pady=5)
         delete_btn = tk.Button(button_frame, text="🗑 Xóa giao dịch", bg="#E74C3C", fg="white",
@@ -82,6 +88,13 @@ class FinanceApp(tk.Tk):
         add_expense_btn.pack(side="left", padx=10)
         edit_btn.pack(side="left", padx=10)
         delete_btn.pack(side="left", padx=10)
+
+    def open_transaction_form(self, type):
+        form = TransactionForm(self)
+        if type == "income":
+            form.type_var.set("income")
+        else:
+            form.type_var.set("expense")
 
     def create_wallet_buttons(self):
         button_frame = tk.Frame(self.current_frame, bg="#FFFFFF")
@@ -97,12 +110,13 @@ class FinanceApp(tk.Tk):
         balance_btn.pack(side="left", padx=10)
         add_wallet_btn.pack(side="left", padx=10)
         transfer_btn.pack(side="left", padx=10)
+        WalletManager(self.current_frame)
 
     def create_category_buttons(self):
-        pass
+        CategoryManager(self.current_frame)
 
     def create_report_view(self):
-        pass
+        ReportViewer(self.current_frame)
 
     def create_planning_view(self):
         pass
