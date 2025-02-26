@@ -14,3 +14,17 @@ def get_categories():
     rows = cursor.fetchall()
     conn.close()
     return rows
+
+def update_category(name, new_name, type):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute('UPDATE categories SET name = ?, type = ? WHERE name = ?', (new_name, type, name))
+    conn.commit()
+    conn.close()
+
+def delete_category(name):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM categories WHERE name = ?', (name,))
+    conn.commit()
+    conn.close()

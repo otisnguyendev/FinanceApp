@@ -33,3 +33,17 @@ def transfer_money(from_wallet_id, to_wallet_id, amount):
 
     conn.commit()
     conn.close()
+
+def update_wallet(wallet_id, name, balance):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute('UPDATE wallets SET name = ?, balance = ? WHERE id = ?', (name, balance, wallet_id))
+    conn.commit()
+    conn.close()
+
+def delete_wallet(wallet_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM wallets WHERE id = ?', (wallet_id,))
+    conn.commit()
+    conn.close()
