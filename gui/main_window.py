@@ -37,8 +37,7 @@ class FinanceApp(tk.Tk):
             ("Giao dịch", self.show_transactions),
             ("Danh mục", self.show_categories),
             ("Ví tiền", self.show_wallets),
-            ("Báo cáo", self.show_reports),
-            ("Lập kế hoạch", self.show_planning),
+            ("Báo cáo", self.show_reports)
         ]
         for text, command in options:
             tk.Button(sidebar_frame, text=text, bg="#2C3E50", fg="white", font=("Poppins", 12, "bold"), bd=0, relief="flat", pady=15, activebackground="#3498DB", activeforeground="white",
@@ -59,8 +58,6 @@ class FinanceApp(tk.Tk):
             WalletManager(self.current_frame)
         elif section_title == "Báo cáo":
             ReportViewer(self.current_frame)
-        elif section_title == "Lập kế hoạch":
-            pass
 
     def show_home(self):
         self.create_main_content("Trang chủ")
@@ -76,6 +73,3 @@ class FinanceApp(tk.Tk):
 
     def show_reports(self):
         self.create_main_content("Báo cáo")
-
-    def show_planning(self):
-        self.create_main_content("Lập kế hoạch")
